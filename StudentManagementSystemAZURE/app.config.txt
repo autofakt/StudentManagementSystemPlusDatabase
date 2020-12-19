@@ -1,0 +1,3 @@
+jdbc:mysql://studentmanagementwest.mysql.database.azure.com:3306/piercecollege
+autofakt5@studentmanagementwest
+bAgdadian555
