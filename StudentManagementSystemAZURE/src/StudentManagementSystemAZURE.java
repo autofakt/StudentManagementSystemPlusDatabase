@@ -17,8 +17,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-
 class MyGenericList<T extends Comparable<T>> {
 	private class Node<T> {
 		T value;
@@ -3663,7 +3661,8 @@ class InstructorEditPanel extends JPanel {
 	private MyGenericList<Department> departmentLinkedListCopy;
 	String[] listToArray;
 	String[] departmentNames;
-	String departmentName; // displayed in edit section could not pull from DID and departmentNames so had to pass.
+	String departmentName; // displayed in edit section could not pull from DID and departmentNames so had
+							// to pass.
 
 	private static final long serialVersionUID = 1L;
 	Instructor instructor;
@@ -3700,7 +3699,7 @@ class InstructorEditPanel extends JPanel {
 		// return courseAdd_departmentText.getText();
 		return (String) instructorEdit_departmentCombo.getSelectedItem();
 	}
-	
+
 	public int getDepartmentIndex() {
 		// return instructorEdit_departmentCombo.getSelectedIndex(); old linked list
 		return instructorEdit_departmentCombo.getSelectedIndex() + 1; // offset for databases
@@ -3714,14 +3713,15 @@ class InstructorEditPanel extends JPanel {
 
 	// old linked list constructor //NOT USED
 	public InstructorEditPanel(Instructor temp, MyGenericList<Department> departmentLinkedListCopy)
-		throws FileNotFoundException {
+			throws FileNotFoundException {
 		this.instructor = temp;
 		this.departmentLinkedListCopy = departmentLinkedListCopy;
-		//buildInstructorEditPanel(instructor);
+		// buildInstructorEditPanel(instructor);
 	}
 
 	// database constructor
-	public InstructorEditPanel(Instructor temp, String departmentName, String[] departmentNames) throws FileNotFoundException {
+	public InstructorEditPanel(Instructor temp, String departmentName, String[] departmentNames)
+			throws FileNotFoundException {
 		this.instructor = temp;
 		this.departmentNames = departmentNames;
 		this.departmentName = departmentName;
@@ -3737,7 +3737,7 @@ class InstructorEditPanel extends JPanel {
 
 	}
 
-	public void buildInstructorEditPanel(Instructor instructor,String departmentName) {
+	public void buildInstructorEditPanel(Instructor instructor, String departmentName) {
 
 		JPanel label_JPanel = new JPanel();
 		instructorEdit_label = new JLabel("[Old Instructor Data]");
@@ -3773,10 +3773,12 @@ class InstructorEditPanel extends JPanel {
 		instructorEdit_DIDNameLabel = new JLabel("Department Name");
 		// instructorEdit_DIDNameText = new
 		// JTextField(getDepartmentNameFromLinkedList());
-		//int indexToDepartmentName = instructor.getInstructorDID() - 1; // offset from 1 to 0.  //not used
-		//instructorEdit_DIDNameText = new JTextField(departmentNames[indexToDepartmentName]);   //not used 
+		// int indexToDepartmentName = instructor.getInstructorDID() - 1; // offset from
+		// 1 to 0. //not used
+		// instructorEdit_DIDNameText = new
+		// JTextField(departmentNames[indexToDepartmentName]); //not used
 		instructorEdit_DIDNameText = new JTextField(departmentName);
-		
+
 		instructorEdit_DIDNameText.setEditable(false);
 		instructorDIDName_JPanel.add(instructorEdit_DIDNameLabel);
 		instructorDIDName_JPanel.add(instructorEdit_DIDNameText);
@@ -3885,12 +3887,11 @@ class InstructorSearchPanel extends JPanel { // NEEDS VALUE CHECKING
 }
 
 public class StudentManagementSystemAZURE extends JFrame {
-	
+
 	public static String URL;
 	public static String USERNAME;
 	public static String PASSWORD;
 	public static String timeFix = "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-	
 
 	private static final long serialVersionUID = 1L;
 	private final int WINDOW_WIDTH = 800;
@@ -4086,36 +4087,34 @@ public class StudentManagementSystemAZURE extends JFrame {
 	ArrayList<Integer> studentPosition = new ArrayList<Integer>();// not used right now
 
 	public static void getURLString() {
-		
+
 		try {
-		      File myObj = new File("app.config.txt");
-		      Scanner myReader = new Scanner(myObj);
-		
-		      URL = myReader.nextLine();
-		       // System.out.println(URL);
-		        
-		        USERNAME = myReader.nextLine();
-		       // System.out.println(Connection);
-		        
-		        PASSWORD = myReader.nextLine();
-		     
-		      myReader.close();
-		    } catch (FileNotFoundException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		    }
-		
-		
-		 
+			File myObj = new File("app.config.txt");
+			Scanner myReader = new Scanner(myObj);
+
+			URL = myReader.nextLine();
+			// System.out.println(URL);
+
+			USERNAME = myReader.nextLine();
+			// System.out.println(Connection);
+
+			PASSWORD = myReader.nextLine();
+
+			myReader.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+
 	}
-	
+
 	public Connection getConnection() throws SQLException {
 		Connection conn = null;
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", USERNAME);
 		connectionProps.put("password", PASSWORD);
 
-		conn = DriverManager.getConnection(URL+timeFix,connectionProps);
+		conn = DriverManager.getConnection(URL + timeFix, connectionProps);
 		return conn;
 	}
 
@@ -4338,7 +4337,9 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public Instructor createInstructorOLD(int numberOfInstructorsInFile) { //made new version because needed actual string for did instead of index can erase later if everything is ok
+	public Instructor createInstructorOLD(int numberOfInstructorsInFile) { // made new version because needed actual
+																			// string for did instead of index can erase
+																			// later if everything is ok
 		String instructorName;
 		instructorName = instructorAddPanel.getInstructorName();
 		int instructorDID = instructorAddPanel.getDepartmentIndex();
@@ -4347,8 +4348,9 @@ public class StudentManagementSystemAZURE extends JFrame {
 		return newInstructor;
 
 	}
-	
-	public Instructor createInstructor(int numberOfInstructorsInFile) { // solved problem with incorrect DIDindex in instructor add/edit
+
+	public Instructor createInstructor(int numberOfInstructorsInFile) { // solved problem with incorrect DIDindex in
+																		// instructor add/edit
 		String instructorName;
 		instructorName = instructorAddPanel.getInstructorName();
 		String departmentStringValue = instructorAddPanel.getDepartment();
@@ -4591,8 +4593,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 		return array;
 	}
 
-	
-	//Student CALL Procedures
+	// Student CALL Procedures
 	public int countStudentMYSQL() {
 		Connection conn = null;
 		try {
@@ -4614,12 +4615,12 @@ public class StudentManagementSystemAZURE extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//System.out.println("OUTPUT COUNT: " + numOfStudentRows);
-		return numOfStudentRows+1;
-		
+
+		// System.out.println("OUTPUT COUNT: " + numOfStudentRows);
+		return numOfStudentRows + 1;
+
 	}
-	
+
 	public void insertStudentMYSQL(Student temp) {
 		Connection conn = null;
 		try {
@@ -4634,26 +4635,25 @@ public class StudentManagementSystemAZURE extends JFrame {
 		try {
 			int sID = temp.getID();
 			String fName = temp.getFirstName();
-			String lName = temp.getLastName(); 
+			String lName = temp.getLastName();
 			String address = temp.getAddress();
-			String city = temp.getCity(); 
+			String city = temp.getCity();
 			String state = temp.getState();
-			
-			statement = (CallableStatement) conn.prepareCall("{call insertStudent(" 
-			+String.valueOf(sID) +",'" + fName +"','" +lName +"','" +address +"','"
-			+ city + "','" + state +"')}");
+
+			statement = (CallableStatement) conn.prepareCall("{call insertStudent(" + String.valueOf(sID) + ",'" + fName
+					+ "','" + lName + "','" + address + "','" + city + "','" + state + "')}");
 			System.out.println(statement);
-			
+
 			statement.execute();
-			
+
 			statement.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-				
+
 	}
-	
+
 	public void updateStudentMYSQL(Student temp) {
 		Connection conn = null;
 		try {
@@ -4668,27 +4668,74 @@ public class StudentManagementSystemAZURE extends JFrame {
 		try {
 			int sID = temp.getID();
 			String fName = temp.getFirstName();
-			String lName = temp.getLastName(); 
+			String lName = temp.getLastName();
 			String address = temp.getAddress();
-			String city = temp.getCity(); 
+			String city = temp.getCity();
 			String state = temp.getState();
-			
-			statement = (CallableStatement) conn.prepareCall("{call updateStudent(" 
-			+String.valueOf(sID) +",'" + fName +"','" +lName +"','" +address +"','"
-			+ city + "','" + state +"')}");
+
+			statement = (CallableStatement) conn.prepareCall("{call updateStudent(" + String.valueOf(sID) + ",'" + fName
+					+ "','" + lName + "','" + address + "','" + city + "','" + state + "')}");
 			System.out.println(statement);
-			
+
 			statement.execute();
-			
+
 			statement.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-				
+
 	}
 
-	//Department CALL Procedures
+	public Student getStudentMYSQL(int index) {
+		Connection conn = null;
+		try {
+			conn = getConnection();
+		} catch (SQLException e2) {
+			System.out.println("ERROR: Could not connect to the database");
+			e2.printStackTrace();
+			return null;
+		}
+
+		CallableStatement statement = null;
+		ResultSet result = null;
+
+		try {
+			statement = (CallableStatement) conn.prepareCall("{call getStudent(" + String.valueOf(index) + ")}");
+			result = statement.executeQuery();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(statement);
+
+		Student temp = null;
+
+		try {
+			result.next();
+			int studentID = result.getInt(1);
+			String firstName = result.getString(2);
+			String lastName = result.getString(3);
+			String address = result.getString(4);
+			String city = result.getString(5);
+			String state = result.getString(6);
+			temp = new Student(studentID, firstName, lastName, address, city, state);
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			conn.close();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		return temp;
+	}
+
+	// Department CALL Procedures
 	public int countDepartmentMYSQL() {
 		Connection conn = null;
 		try {
@@ -4710,12 +4757,12 @@ public class StudentManagementSystemAZURE extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//System.out.println("OUTPUT COUNT: " + numOfStudentRows);
-		return numOfDepartmentRows+1;
-		
+
+		// System.out.println("OUTPUT COUNT: " + numOfStudentRows);
+		return numOfDepartmentRows + 1;
+
 	}
-	
+
 	public void insertDepartmentMYSQL(Department temp) {
 		Connection conn = null;
 		try {
@@ -4730,23 +4777,22 @@ public class StudentManagementSystemAZURE extends JFrame {
 		try {
 			int dID = temp.getDID();
 			String dName = temp.getDepartmentName();
-			
-			
-			statement = (CallableStatement) conn.prepareCall("{call insertDepartment(" 
-			+String.valueOf(dID) +",'" + dName +"')}");
+
+			statement = (CallableStatement) conn
+					.prepareCall("{call insertDepartment(" + String.valueOf(dID) + ",'" + dName + "')}");
 			System.out.println(statement);
-			
+
 			statement.execute();
-			
+
 			statement.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-				
+
 	}
-	
-	public void updateDepartmentMYSQL(Department temp) { 
+
+	public void updateDepartmentMYSQL(Department temp) {
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -4760,23 +4806,68 @@ public class StudentManagementSystemAZURE extends JFrame {
 		try {
 			int dID = temp.getDID();
 			String dName = temp.getDepartmentName();
-			
-			
-			statement = (CallableStatement) conn.prepareCall("{call updateDepartment(" 
-			+String.valueOf(dID) +",'" + dName +"')}");
+
+			statement = (CallableStatement) conn
+					.prepareCall("{call updateDepartment(" + String.valueOf(dID) + ",'" + dName + "')}");
 			System.out.println(statement);
-			
+
 			statement.execute();
-			
+
 			statement.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-				
+
+	}
+
+	public Department getDepartmentMYSQL(int index) {
+		Connection conn = null;
+		try {
+			conn = getConnection();
+		} catch (SQLException e2) {
+			System.out.println("ERROR: Could not connect to the database");
+			e2.printStackTrace();
+			return null;
+		}
+
+		CallableStatement statement = null;
+		ResultSet result = null;
+
+		try {
+			statement = (CallableStatement) conn.prepareCall("{call getDepartment(" + String.valueOf(index) + ")}");
+			result = statement.executeQuery();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(statement);
+
+		Department temp = null;
+
+		try {
+			result.next();
+			int DID = result.getInt(1);
+			String dName = result.getString(2);
+
+			temp = new Department(DID, dName);
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			conn.close();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		return temp;
+
 	}
 	
-	//Instructor CALL Procedures
+	// Instructor CALL Procedures
 	public int countInstructorMYSQL() {
 		Connection conn = null;
 		try {
@@ -4798,12 +4889,12 @@ public class StudentManagementSystemAZURE extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//System.out.println("OUTPUT COUNT: " + numOfStudentRows);
-		return numOfInstructorRows+1;
-		
+
+		// System.out.println("OUTPUT COUNT: " + numOfStudentRows);
+		return numOfInstructorRows + 1;
+
 	}
-	
+
 	public void insertInstructorMYSQL(Instructor temp) {
 		Connection conn = null;
 		try {
@@ -4819,22 +4910,22 @@ public class StudentManagementSystemAZURE extends JFrame {
 			int iID = temp.getIID();
 			String iName = temp.getInstructorName();
 			int iDID = temp.getInstructorDID();
-			
-			statement = (CallableStatement) conn.prepareCall("{call insertInstructor(" 
-			+String.valueOf(iID) +",'" + iName +"'," + String.valueOf(iDID) +")}");
+
+			statement = (CallableStatement) conn.prepareCall("{call insertInstructor(" + String.valueOf(iID) + ",'"
+					+ iName + "'," + String.valueOf(iDID) + ")}");
 			System.out.println(statement);
-			
+
 			statement.execute();
-			
+
 			statement.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-				
+
 	}
-	
-	public void updateInstructorMYSQL(Instructor temp) { 
+
+	public void updateInstructorMYSQL(Instructor temp) {
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -4849,23 +4940,68 @@ public class StudentManagementSystemAZURE extends JFrame {
 			int IID = temp.getIID();
 			String iName = temp.getInstructorName();
 			int iDID = temp.getInstructorDID();
-			
-			
-			statement = (CallableStatement) conn.prepareCall("{call updateInstructor(" 
-			+String.valueOf(IID) +",'" + iName + "'," + iDID  + ")}");
+
+			statement = (CallableStatement) conn
+					.prepareCall("{call updateInstructor(" + String.valueOf(IID) + ",'" + iName + "'," + iDID + ")}");
 			System.out.println(statement);
-			
+
 			statement.execute();
-			
+
 			statement.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-				
+
+	}
+
+	public Instructor getInstructorMYSQL(int index) {
+		Connection conn = null;
+		try {
+			conn = getConnection();
+		} catch (SQLException e2) {
+			System.out.println("ERROR: Could not connect to the database");
+			e2.printStackTrace();
+			return null;
+		}
+
+		CallableStatement statement = null;
+		ResultSet result = null;
+
+		try {
+			statement = (CallableStatement) conn.prepareCall("{call getInstructor(" + String.valueOf(index) + ")}");
+			result = statement.executeQuery();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(statement);
+
+		Instructor temp = null;
+
+		try {
+			result.next();
+			int IID = result.getInt(1);
+			String iName = result.getString(2);
+			int iDID = result.getInt(3);
+			
+			temp = new Instructor(IID, iName, iDID);
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			conn.close();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		return temp;
 	}
 	
-	//Course CALL Procedures
+	// Course CALL Procedures
 	public int countCourseMYSQL() {
 		Connection conn = null;
 		try {
@@ -4887,12 +5023,12 @@ public class StudentManagementSystemAZURE extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//System.out.println("OUTPUT COUNT: " + numOfStudentRows);
-		return numOfCourseRows+1;
-		
+
+		// System.out.println("OUTPUT COUNT: " + numOfStudentRows);
+		return numOfCourseRows + 1;
+
 	}
-	
+
 	public void insertCourseMYSQL(Course temp) {
 		Connection conn = null;
 		try {
@@ -4907,25 +5043,24 @@ public class StudentManagementSystemAZURE extends JFrame {
 		try {
 			int cNUM = temp.getCNUM();
 			String cID = temp.getCID();
-			String cNAME = temp.getcName(); 
+			String cNAME = temp.getcName();
 			String inst = temp.getInstructor();
-			String depart = temp.getDepartment(); 
-			
-			statement = (CallableStatement) conn.prepareCall("{call insertCourse(" 
-			+String.valueOf(cNUM) +",'" + cID +"','" +cNAME +"','" +inst +"','"
-			+ depart  +"')}");
+			String depart = temp.getDepartment();
+
+			statement = (CallableStatement) conn.prepareCall("{call insertCourse(" + String.valueOf(cNUM) + ",'" + cID
+					+ "','" + cNAME + "','" + inst + "','" + depart + "')}");
 			System.out.println(statement);
-			
+
 			statement.execute();
-			
+
 			statement.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-				
+
 	}
-	
+
 	public void updateCourseMYSQL(Course temp) {
 		Connection conn = null;
 		try {
@@ -4943,24 +5078,69 @@ public class StudentManagementSystemAZURE extends JFrame {
 			String CNAME = temp.getcName();
 			String instructor = temp.getInstructor();
 			String department = temp.getDepartment();
-			
-			
-			statement = (CallableStatement) conn.prepareCall("{call updateCourse(" 
-			+String.valueOf(CNUM) +",'" + CID +"','" +CNAME +"','" + instructor +"','"
-			+ department +"')}");
+
+			statement = (CallableStatement) conn.prepareCall("{call updateCourse(" + String.valueOf(CNUM) + ",'" + CID
+					+ "','" + CNAME + "','" + instructor + "','" + department + "')}");
 			System.out.println(statement);
-			
+
 			statement.execute();
-			
+
 			statement.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-				
+
+	}
+
+	public Course getCourseMYSQL(int index) {
+		Connection conn = null;
+		try {
+			conn = getConnection();
+		} catch (SQLException e2) {
+			System.out.println("ERROR: Could not connect to the database");
+			e2.printStackTrace();
+			return null;
+		}
+
+		CallableStatement statement = null;
+		ResultSet result = null;
+
+		try {
+			statement = (CallableStatement) conn.prepareCall("{call getCourse(" + String.valueOf(index) + ")}");
+			result = statement.executeQuery();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(statement);
+
+		Course temp = null;
+
+		try {
+			result.next();
+			int CNUM = result.getInt(1);
+			String CID = result.getString(2);
+			String cName = result.getString(3);
+			String instructor = result.getString(4);
+			String department = result.getString(5);
+			temp = new Course(CNUM, CID, cName,instructor,department);
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			conn.close();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		return temp;
 	}
 	
-	//Enrollment CALL Procedures
+	// Enrollment CALL Procedures
 	public int countEnrollmentMYSQL() {
 		Connection conn = null;
 		try {
@@ -4982,12 +5162,12 @@ public class StudentManagementSystemAZURE extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//System.out.println("OUTPUT COUNT: " + numOfStudentRows);
-		return numOfEnrollmentRows+1;
-		
+
+		// System.out.println("OUTPUT COUNT: " + numOfStudentRows);
+		return numOfEnrollmentRows + 1;
+
 	}
-	
+
 	public void insertEnrollmentMYSQL(Enrollment temp) {
 		Connection conn = null;
 		try {
@@ -5002,26 +5182,26 @@ public class StudentManagementSystemAZURE extends JFrame {
 		try {
 			int EIDTemp = temp.getEID();
 			int SIDTemp = temp.getStudentID();
-			int CNUMTemp = temp.getcNum(); 
+			int CNUMTemp = temp.getcNum();
 			String yearTemp = temp.getYear();
-			String semesterTemp = temp.getSemester(); 
+			String semesterTemp = temp.getSemester();
 			String gradeTemp = temp.getGrade();
-			
-			statement = (CallableStatement) conn.prepareCall("{call insertEnrollment(" 
-			+String.valueOf(EIDTemp) +"," + String.valueOf(SIDTemp) +"," + String.valueOf(CNUMTemp) +",'" +yearTemp +"','"
-			+semesterTemp + "','" + gradeTemp +"')}");
+
+			statement = (CallableStatement) conn.prepareCall("{call insertEnrollment(" + String.valueOf(EIDTemp) + ","
+					+ String.valueOf(SIDTemp) + "," + String.valueOf(CNUMTemp) + ",'" + yearTemp + "','" + semesterTemp
+					+ "','" + gradeTemp + "')}");
 			System.out.println(statement);
-			
+
 			statement.execute();
-			
+
 			statement.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-				
+
 	}
-	
+
 	public void updateEnrollmentMYSQL(Enrollment temp) {
 		Connection conn = null;
 		try {
@@ -5038,26 +5218,74 @@ public class StudentManagementSystemAZURE extends JFrame {
 			int SID = temp.getStudentID();
 			int CNUM = temp.getcNum();
 			String year = temp.getYear();
-			String semester = temp.getSemester(); 
+			String semester = temp.getSemester();
 			String grade = temp.getGrade();
-			
-			statement = (CallableStatement) conn.prepareCall("{call updateStudent(" 
-			+String.valueOf(EID) +"," + String.valueOf(SID) +"," +String.valueOf(CNUM) +",'" +year +"','"
-			+ semester + "','" + grade +"')}");
+
+			statement = (CallableStatement) conn
+					.prepareCall("{call updateEnrollment(" + String.valueOf(EID) + "," + String.valueOf(SID) + ","
+							+ String.valueOf(CNUM) + ",'" + year + "','" + semester + "','" + grade + "')}");
 			System.out.println(statement);
-			
+
 			statement.execute();
-			
+
 			statement.close();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-				
+
+	}
+
+	public Enrollment getEnrollmentMYSQL(int index) {
+		Connection conn = null;
+		try {
+			conn = getConnection();
+		} catch (SQLException e2) {
+			System.out.println("ERROR: Could not connect to the database");
+			e2.printStackTrace();
+			return null;
+		}
+
+		CallableStatement statement = null;
+		ResultSet result = null;
+
+		try {
+			statement = (CallableStatement) conn.prepareCall("{call getEnrollment(" + String.valueOf(index) + ")}");
+			result = statement.executeQuery();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(statement);
+
+		Enrollment temp = null;
+
+		try {
+			result.next();
+			int EID = result.getInt(1);
+			int SID = result.getInt(2);
+			int CNUM = result.getInt(3);
+			String year = result.getString(4);
+			String semester = result.getString(5);
+			String grade = result.getString(6);
+			temp = new Enrollment(EID, SID, CNUM, year, semester,grade);
+			statement.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			conn.close();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		return temp;
 	}
 	
 	// Student SQL functions
-	public int countStudentMYSQLREPLACED() {  //replaced with procedure
+	public int countStudentMYSQLREPLACED() { // replaced with procedure
 		int numOfStudentRows = 0;
 		Connection conn = null;
 		try {
@@ -5097,7 +5325,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public void insertStudentMYSQLREPLACED(Student temp) { //replaced with procedure
+	public void insertStudentMYSQLREPLACED(Student temp) { // replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5136,7 +5364,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 		}
 	}
 
-	public void updateStudentMYSQLREPLACED(Student editedStudent) { //replaced with procedure
+	public void updateStudentMYSQLREPLACED(Student editedStudent) { // replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5179,7 +5407,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public Student getStudentMYSQL(int index) {
+	public Student getStudentMYSQLREPLACED(int index) { // replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5276,7 +5504,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 	}
 
 	// Department SQL functions
-	public int countDepartmentMYSQLREPLACED() { //replaced with procedure
+	public int countDepartmentMYSQLREPLACED() { // replaced with procedure
 		int numOfDepartmentRows = 0;
 		Connection conn = null;
 		try {
@@ -5316,7 +5544,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public void insertDepartmentMYSQLREPLACED(Department temp) { //replaced with procedure
+	public void insertDepartmentMYSQLREPLACED(Department temp) { // replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5354,7 +5582,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 		}
 	}
 
-	public void updateDepartmentMYSQLREPLACED(Department editedDepartment) { //replaced with procedure
+	public void updateDepartmentMYSQLREPLACED(Department editedDepartment) { // replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5393,7 +5621,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public Department getDepartmentMYSQL(int index) {
+	public Department getDepartmentMYSQLREPLACED(int index) { //replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5436,7 +5664,8 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public int getDepartmentIndexMYSQL(String passedDepartmentName) {  //get department index by name for instructor create
+	public int getDepartmentIndexMYSQL(String passedDepartmentName) { // get department index by name for instructor
+																		// create
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5456,13 +5685,13 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 		String sqlStatement = "Select DID FROM department WHERE departmentName = '" + passedDepartmentName + "';";
 
-		int DID=0;
+		int DID = 0;
 		try {
 			ResultSet result = stmt.executeQuery(sqlStatement);
 			result.next();
 			DID = result.getInt(1);
-			//String departmentName = result.getString(2);
-			//temp = new Department(DID, departmentName);
+			// String departmentName = result.getString(2);
+			// temp = new Department(DID, departmentName);
 			// numOfStudentRows = result.getInt("Count(*)");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -5529,7 +5758,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 	}
 
 	// Instructor SQL functions
-	public int countInstructorMYSQLREPLACED() { //replaced with procedure
+	public int countInstructorMYSQLREPLACED() { // replaced with procedure
 		int numOfInstructorRows = 0;
 		Connection conn = null;
 		try {
@@ -5609,7 +5838,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public void insertInstructorMYSQLREPLACED(Instructor temp) { //replaced with procedure
+	public void insertInstructorMYSQLREPLACED(Instructor temp) { // replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5649,7 +5878,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 		}
 	}
 
-	public void updateInstructorMYSQLREPLACED(Instructor editedInstructor) { //replaced with procedure
+	public void updateInstructorMYSQLREPLACED(Instructor editedInstructor) { // replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5691,7 +5920,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public Instructor getInstructorMYSQL(int index) {
+	public Instructor getInstructorMYSQLREPLACED(int index) { //replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5798,7 +6027,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 	}
 
 	// Course SQL functions
-	public int countCourseMYSQLREPLACED() { //replaced with procedure
+	public int countCourseMYSQLREPLACED() { // replaced with procedure
 		int numOfCourseRows = 0;
 		Connection conn = null;
 		try {
@@ -5878,7 +6107,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public void insertCourseMYSQLREPLACED(Course temp) { //replaced with procedure
+	public void insertCourseMYSQLREPLACED(Course temp) { // replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5917,7 +6146,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 		}
 	}
 
-	public void updateCourseMYSQLREPLACED(Course editedCourse) { //replaced with procedure
+	public void updateCourseMYSQLREPLACED(Course editedCourse) { // replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5960,7 +6189,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public Course getCourseMYSQL(int index) {
+	public Course getCourseMYSQLREPLACED(int index) { //replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -6118,7 +6347,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 	}
 
 	// Enrollment SQL function
-	public int countEnrollmentMYSQLREPLACED() { //replaced with procedure
+	public int countEnrollmentMYSQLREPLACED() { // replaced with procedure
 		int numOfEnrollmentRows = 0;
 		Connection conn = null;
 		try {
@@ -6282,7 +6511,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public void insertEnrollmentMYSQLREPLACED(Enrollment temp) { //replaced with procedure
+	public void insertEnrollmentMYSQLREPLACED(Enrollment temp) { // replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -6364,7 +6593,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public Enrollment getEnrollmentMYSQL(int index) {
+	public Enrollment getEnrollmentMYSQLREPLACED(int index) { //replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -6452,9 +6681,9 @@ public class StudentManagementSystemAZURE extends JFrame {
 		}
 
 		String sqlStatement = "Select * FROM department;";
-		
-		int numberOfDepartmentsCountMYSQL = countDepartmentMYSQL()-1;
-		
+
+		int numberOfDepartmentsCountMYSQL = countDepartmentMYSQL() - 1;
+
 		String[][] allDepartmentData = new String[numberOfDepartmentsCountMYSQL][2];
 
 		try {
@@ -6535,9 +6764,9 @@ public class StudentManagementSystemAZURE extends JFrame {
 		}
 
 		String sqlStatement = "Select * FROM instructor;";
-		
+
 		int numberOfInstructorsCountMYSQL = countInstructorMYSQL() - 1;
-		
+
 		String[][] allInstructorData = new String[numberOfInstructorsCountMYSQL][3];
 
 		try {
@@ -6600,7 +6829,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 		studentTableFrame.setVisible(true);
 	}
 
-	public String[][] loadStudentTable() {  //only one with active procedure
+	public String[][] loadStudentTable() { // only one with active procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -6621,7 +6850,8 @@ public class StudentManagementSystemAZURE extends JFrame {
 		String sqlStatement = "Select * FROM student;";
 
 		String[][] allStudentData = new String[countStudentMYSQL() - 1][6];
-		//String[][] allStudentData = new String[countStudentProcedure() - 1][6]; //switched to procedure
+		// String[][] allStudentData = new String[countStudentProcedure() - 1][6];
+		// //switched to procedure
 
 		try {
 			ResultSet result = stmt.executeQuery(sqlStatement);
@@ -7424,7 +7654,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 	private class SearchButtonListener implements ActionListener { // ERASE OLD LINES
 		public void actionPerformed(ActionEvent e) {
 			closeStudentTable();
-			
+
 			int SIDValue = 0;
 
 			if (studentSearchPanel.getInputStudentIDText().isEmpty()) {
@@ -7442,13 +7672,15 @@ public class StudentManagementSystemAZURE extends JFrame {
 			}
 
 			else {
-				int numberOfStudentsCountMYSQL = countStudentMYSQL()-1;
+				int numberOfStudentsCountMYSQL = countStudentMYSQL() - 1;
 				SIDValue = Integer.parseInt(studentSearchPanel.getInputStudentIDText());
 				if (SIDValue > numberOfStudentsCountMYSQL || SIDValue <= 0) {
 					JOptionPane.showMessageDialog(null,
 							"Student ID input value of " + SIDValue + " is higher than the actual stored"
-									+ " records value of " + (numberOfStudentsCountMYSQL) // count is 1 ahead because first
-																						// database entry is 1 and no 0.
+									+ " records value of " + (numberOfStudentsCountMYSQL) // count is 1 ahead because
+																							// first
+																							// database entry is 1 and
+																							// no 0.
 									+ ". Value also cannot be 0 or below.");
 					closeStudentTable();
 
@@ -7460,7 +7692,8 @@ public class StudentManagementSystemAZURE extends JFrame {
 					try {
 						if (numberOfStudentsCountMYSQL != 0) {
 							int number = -1;
-							while (number < 1 || number > numberOfStudentsCountMYSQL) { //was plus one for count but left it
+							while (number < 1 || number > numberOfStudentsCountMYSQL) { // was plus one for count but
+																						// left it
 								number = Integer.parseInt(studentSearchPanel.getInputStudentIDText());
 							}
 							int noOffsetNumber = number;
@@ -7727,62 +7960,62 @@ public class StudentManagementSystemAZURE extends JFrame {
 	private class preCourseAddListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			
+
 			revalidate();
 			repaint();
 
-			
 			if ((countDepartmentMYSQL() - 1) == 0) {
 
 				JOptionPane.showMessageDialog(null, "Please add at least one department first.");
 				revalidate();
 				repaint();
 			}
-			
+
 			else if ((countInstructorMYSQL() - 1) == 0) {
 
 				JOptionPane.showMessageDialog(null, "Please add at least one instructor first.");
 				revalidate();
 				repaint();
 			}
-			
+
 			else {
 				openCourseTable(loadCourseTable());
-			try {
-				courseRecord = new CourseFile("course.dat");
+				try {
+					courseRecord = new CourseFile("course.dat");
 
-			} catch (FileNotFoundException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			preMainPanel_Course = new JPanel();
-			// mainPanel.setLayout(new GridLayout(2,1));
-			try {
-				// courseAddPanel = new CourseAddPanel(departmentLinkedList,
-				// instructorLinkedList); // Takes in a linked list for combo box
-				preCourseAddPanel = new PreCourseAddPanel(getAllDepartmentsMYSQL()); // Takes in a linked list for combo
-																						// box
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
-			preMainPanel_Course.setLayout(new GridLayout(2, 1));
-			nextButton_Course = new JButton("Next");
-			nextButton_Course.addActionListener(new CourseAddListener()); // add new listener
-			JPanel buttonPanel = new JPanel();
+				} catch (FileNotFoundException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				preMainPanel_Course = new JPanel();
+				// mainPanel.setLayout(new GridLayout(2,1));
+				try {
+					// courseAddPanel = new CourseAddPanel(departmentLinkedList,
+					// instructorLinkedList); // Takes in a linked list for combo box
+					preCourseAddPanel = new PreCourseAddPanel(getAllDepartmentsMYSQL()); // Takes in a linked list for
+																							// combo
+																							// box
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				preMainPanel_Course.setLayout(new GridLayout(2, 1));
+				nextButton_Course = new JButton("Next");
+				nextButton_Course.addActionListener(new CourseAddListener()); // add new listener
+				JPanel buttonPanel = new JPanel();
 
-			buttonPanel.add(nextButton_Course);
+				buttonPanel.add(nextButton_Course);
 
-			nextCancel_Course = new JButton("Cancel");
-			nextCancel_Course.addActionListener(new nextCancelButton_prePanelListener_Course());
+				nextCancel_Course = new JButton("Cancel");
+				nextCancel_Course.addActionListener(new nextCancelButton_prePanelListener_Course());
 
-			buttonPanel.add(nextCancel_Course);
-			preMainPanel_Course.add(preCourseAddPanel);
-			preMainPanel_Course.add(buttonPanel);
+				buttonPanel.add(nextCancel_Course);
+				preMainPanel_Course.add(preCourseAddPanel);
+				preMainPanel_Course.add(buttonPanel);
 
-			add(preMainPanel_Course);
-			setVisible(true);
-			revalidate();
-			repaint();
+				add(preMainPanel_Course);
+				setVisible(true);
+				revalidate();
+				repaint();
 			}
 		}
 	}
@@ -7820,13 +8053,13 @@ public class StudentManagementSystemAZURE extends JFrame {
 			// courseAddPanel = new CourseAddPanel(departmentLinkedList,
 			// instructorLinkedList); // Takes in a linked list for combo box
 			String prePanelDepartmentName = preCourseAddPanel.getDepartment();
-			
-			//section added to enable combobox string to give proper index of that department.
-			//Was getting incorrect index based on array position
+
+			// section added to enable combobox string to give proper index of that
+			// department.
+			// Was getting incorrect index based on array position
 			int prePanelDepartmentIndex = getDepartmentIndexMYSQL(prePanelDepartmentName);
-			
-			
-			//int prePanelDepartmentIndex = preCourseAddPanel.getDepartmentIndex() + 1;
+
+			// int prePanelDepartmentIndex = preCourseAddPanel.getDepartmentIndex() + 1;
 			System.out.println("Value of DID: " + prePanelDepartmentIndex); // erase later
 			String[] filteredInstructors = getFilteredInstructorsMYSQL(prePanelDepartmentIndex);
 			int lengthOfFilteredInstructors = filteredInstructors.length;
@@ -8088,7 +8321,9 @@ public class StudentManagementSystemAZURE extends JFrame {
 		}
 	}
 
-	private class EditButton_DisplayPanelListener_CourseOLD implements ActionListener { //had a bug stopped using - getting wrong combobox index in course edit panel
+	private class EditButton_DisplayPanelListener_CourseOLD implements ActionListener { // had a bug stopped using -
+																						// getting wrong combobox index
+																						// in course edit panel
 		public void actionPerformed(ActionEvent e) {
 
 			remove(preEditPanel_Course);
@@ -8523,55 +8758,51 @@ public class StudentManagementSystemAZURE extends JFrame {
 			revalidate();
 			repaint();
 
-			
-
-			
-			 if ((countStudentMYSQL() - 1) == 0) {
+			if ((countStudentMYSQL() - 1) == 0) {
 
 				JOptionPane.showMessageDialog(null, "Please add at least one student first.");
 				revalidate();
 				repaint();
 			}
-			
+
 			else if ((countDepartmentMYSQL() - 1) == 0) {
 
 				JOptionPane.showMessageDialog(null, "Please add at least one department first.");
 				revalidate();
 				repaint();
 			}
-			
+
 			else if ((countInstructorMYSQL() - 1) == 0) {
 
 				JOptionPane.showMessageDialog(null, "Please add at least one instructor first.");
 				revalidate();
 				repaint();
-			}
-			else {
+			} else {
 				openStudentTable(loadStudentTable());
-			firstPanel_Enrollment = new JPanel();
-			try {
-				enrollmentFirstPanel = new EnrollmentFirstPanel(); // Object StudentAddPanel
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			}
-			firstPanel_Enrollment.setLayout(new GridLayout(2, 1));
-			searchButton_FirstPanel_Enrollment = new JButton("Search");
-			searchButton_FirstPanel_Enrollment.addActionListener(new SearchButton_FirstPanelListener_Enrollment());
-			JPanel buttonPanel = new JPanel();
+				firstPanel_Enrollment = new JPanel();
+				try {
+					enrollmentFirstPanel = new EnrollmentFirstPanel(); // Object StudentAddPanel
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
+				firstPanel_Enrollment.setLayout(new GridLayout(2, 1));
+				searchButton_FirstPanel_Enrollment = new JButton("Search");
+				searchButton_FirstPanel_Enrollment.addActionListener(new SearchButton_FirstPanelListener_Enrollment());
+				JPanel buttonPanel = new JPanel();
 
-			buttonPanel.add(searchButton_FirstPanel_Enrollment);
+				buttonPanel.add(searchButton_FirstPanel_Enrollment);
 
-			cancelButton_FirstPanel_Enrollment = new JButton("Cancel");
-			cancelButton_FirstPanel_Enrollment.addActionListener(new CancelButton_FirstPanelListener_Enrollment());
+				cancelButton_FirstPanel_Enrollment = new JButton("Cancel");
+				cancelButton_FirstPanel_Enrollment.addActionListener(new CancelButton_FirstPanelListener_Enrollment());
 
-			buttonPanel.add(cancelButton_FirstPanel_Enrollment);
-			firstPanel_Enrollment.add(enrollmentFirstPanel);
-			firstPanel_Enrollment.add(buttonPanel);
+				buttonPanel.add(cancelButton_FirstPanel_Enrollment);
+				firstPanel_Enrollment.add(enrollmentFirstPanel);
+				firstPanel_Enrollment.add(buttonPanel);
 
-			add(firstPanel_Enrollment);
-			setVisible(true);
-			revalidate();
-			repaint();
+				add(firstPanel_Enrollment);
+				setVisible(true);
+				revalidate();
+				repaint();
 			}
 		}
 	}
@@ -8612,11 +8843,11 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 			else
 				try {
-					
+
 					int studentsCount = countStudentMYSQL() - 1;
 					SIDValue = Integer.parseInt(enrollmentFirstPanel.getInputStudentIDText());
 					if (SIDValue > studentsCount || SIDValue <= 0) { // error here when SIDValue is 1 over
-																					// max
+																		// max
 						JOptionPane.showMessageDialog(null,
 								"Student ID input value of " + SIDValue + " is higher than the actual stored"
 										+ " records value of " + (studentsCount)
@@ -8630,7 +8861,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 						openCourseTable(loadCourseTable());
 						Student temp = null;
 						try {
-							if (studentsCount-1 != 0) {
+							if (studentsCount - 1 != 0) {
 								int number = -1;
 								while (number < 1 || number > studentsCount) {
 									number = Integer.parseInt(enrollmentFirstPanel.getInputStudentIDText());
@@ -9164,8 +9395,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 					if (SIDValue > studentCount || SIDValue <= 0) {
 						JOptionPane.showMessageDialog(null,
 								"Student ID input value of " + SIDValue + " is higher than the actual stored"
-										+ " records value of " + (studentCount)
-										+ ". Value also cannot be 0 or below.");
+										+ " records value of " + (studentCount) + ". Value also cannot be 0 or below.");
 
 						closeStudentTable();
 						remove(introPanel_Grade);
@@ -9429,7 +9659,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 	}
 
 	// Database version
-	private class PostButton_PostPanelListener_Grade implements ActionListener { 
+	private class PostButton_PostPanelListener_Grade implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			int EIDValue = 0;
 			if (!postGradePanel.getPostPanel_EIDText().isEmpty())
@@ -9459,8 +9689,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 					if (EIDValue > enrollmentCount || EIDValue <= 0) {
 						JOptionPane.showMessageDialog(null,
 								"Enrollment ID input value of " + EIDValue + " is higher than the actual stored"
-										+ " records value of " + (enrollmentCount)
-										+ ". Value also cannot be 0.");
+										+ " records value of " + (enrollmentCount) + ". Value also cannot be 0.");
 						closeCourseTable();
 						remove(postPanel_Grade);
 						revalidate();
@@ -9745,7 +9974,8 @@ public class StudentManagementSystemAZURE extends JFrame {
 				displayPanel_Department = new JPanel();
 				departmentDisplayPanel = new DepartmentDisplayPanel(temp);
 				okButton_DisplayPanel_Department = new JButton("OK");
-				okButton_DisplayPanel_Department.addActionListener(new OkButtonListener_DisplayPanelListener_Department());
+				okButton_DisplayPanel_Department
+						.addActionListener(new OkButtonListener_DisplayPanelListener_Department());
 
 				editButton_DisplayPanel_Department = new JButton("Edit");
 				editButton_DisplayPanel_Department.addActionListener(new EditButton_DisplayPanelListener_Department()); // Need
@@ -9881,9 +10111,9 @@ public class StudentManagementSystemAZURE extends JFrame {
 			}
 
 			else {
-			
+
 				int numberOfDepartmentsCountMYSQL = countDepartmentMYSQL() - 1;
-			
+
 				DIDValue = Integer.parseInt(departmentSearchPanel.getInputDepartmentDIDText());
 				if (DIDValue > numberOfDepartmentsCountMYSQL || DIDValue <= 0) {
 
@@ -10135,8 +10365,6 @@ public class StudentManagementSystemAZURE extends JFrame {
 			revalidate();
 			repaint();
 
-			
-
 			if ((countDepartmentMYSQL() - 1) == 0) {
 
 				JOptionPane.showMessageDialog(null, "Please add at least one department first.");
@@ -10275,14 +10503,15 @@ public class StudentManagementSystemAZURE extends JFrame {
 			try {
 				// instructorEditPanel = new
 				// InstructorEditPanel(instructorDisplayPanel.instructor,departmentLinkedList);
-				
-				//section created to extract department name from display panel DID and pass it to edit panel.
-				//was getting incorrect result in edit panel department name Jtextfield
+
+				// section created to extract department name from display panel DID and pass it
+				// to edit panel.
+				// was getting incorrect result in edit panel department name Jtextfield
 				int DIDFromInstructorPanel = instructorDisplayPanel.instructor.getInstructorDID();
 				Department pulledFromInstructorPanel = getDepartmentMYSQL(DIDFromInstructorPanel);
 				String departmentName = pulledFromInstructorPanel.getDepartmentName();
-				
-				instructorEditPanel = new InstructorEditPanel(instructorDisplayPanel.instructor,departmentName,
+
+				instructorEditPanel = new InstructorEditPanel(instructorDisplayPanel.instructor, departmentName,
 						getAllDepartmentsMYSQL()); // make a constructor
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
@@ -10380,15 +10609,12 @@ public class StudentManagementSystemAZURE extends JFrame {
 				// ADD
 
 				String instructorName = instructorEditPanel.getInstructorEdit_nameText2();
-				
-				
-				
+
 				String departmentStringValue = instructorEditPanel.getDepartment();
 				int departmentIndex = getDepartmentIndexMYSQL(departmentStringValue);
 				int instructorDID = departmentIndex;
 				System.out.println("DID in create Instructor: " + departmentIndex);
-				
-				
+
 				int indexDID = departmentIndex;
 
 				Instructor editedInstructor = new Instructor(noOffsetNumber, instructorName, indexDID);
@@ -10678,7 +10904,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		StudentManagementSystemAZURE pierce = new StudentManagementSystemAZURE();
-		
+
 	}
 
 }
