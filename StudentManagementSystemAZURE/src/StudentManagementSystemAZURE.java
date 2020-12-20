@@ -4735,6 +4735,56 @@ public class StudentManagementSystemAZURE extends JFrame {
 		return temp;
 	}
 
+	public String[] getAllStudentsMYSQL() {
+		Connection conn = null;
+		try {
+			conn = getConnection();
+		} catch (SQLException e2) {
+			System.out.println("ERROR: Could not connect to the database");
+			e2.printStackTrace();
+			return null;
+		}
+
+		CallableStatement statement = null;
+		ResultSet result = null;
+
+		try {
+			statement = (CallableStatement) conn.prepareCall("{call getAllStudents()}");
+			result = statement.executeQuery();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(statement);
+		
+		String[] allStudents = new String[countStudentMYSQL() - 1];
+
+		try {
+			int counter = 0;
+			while (result.next()) {
+				allStudents[counter] = String.valueOf(result.getInt(1));
+				counter++;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			conn.close();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
+		for (String i : allStudents) { // erase this later print option
+			System.out.println(i);
+		}
+		return allStudents;
+
+	}
+	
 	// Department CALL Procedures
 	public int countDepartmentMYSQL() {
 		Connection conn = null;
@@ -4865,6 +4915,55 @@ public class StudentManagementSystemAZURE extends JFrame {
 		}
 		return temp;
 
+	}
+	
+	public String[] getAllDepartmentsMYSQL() {
+		Connection conn = null;
+		try {
+			conn = getConnection();
+		} catch (SQLException e2) {
+			System.out.println("ERROR: Could not connect to the database");
+			e2.printStackTrace();
+			return null;
+		}
+
+		CallableStatement statement = null;
+		ResultSet result = null;
+
+		try {
+			statement = (CallableStatement) conn.prepareCall("{call getAllDepartments()}");
+			result = statement.executeQuery();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(statement);
+		
+		String[] allDepartments = new String[countDepartmentMYSQL() - 1];
+
+		try {
+			int counter = 0;
+			while (result.next()) {
+				allDepartments[counter] = result.getString(1);
+				counter++;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			conn.close();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
+		for (String i : allDepartments) { // erase this later print option
+			System.out.println(i);
+		}
+		return allDepartments;
 	}
 	
 	// Instructor CALL Procedures
@@ -5138,6 +5237,55 @@ public class StudentManagementSystemAZURE extends JFrame {
 			e2.printStackTrace();
 		}
 		return temp;
+	}
+	
+	public String[] getAllCoursesMYSQL() {
+		Connection conn = null;
+		try {
+			conn = getConnection();
+		} catch (SQLException e2) {
+			System.out.println("ERROR: Could not connect to the database");
+			e2.printStackTrace();
+			return null;
+		}
+
+		CallableStatement statement = null;
+		ResultSet result = null;
+
+		try {
+			statement = (CallableStatement) conn.prepareCall("{call getAllCourses()}");
+			result = statement.executeQuery();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		System.out.println(statement);
+		
+		String[] allCourses = new String[countCourseMYSQL() - 1];
+
+		try {
+			int counter = 0;
+			while (result.next()) {
+				allCourses[counter] = String.valueOf(result.getInt(1));
+				counter++;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			conn.close();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
+		for (String i : allCourses) { // erase this later print option
+			System.out.println(i);
+		}
+		return allCourses;
 	}
 	
 	// Enrollment CALL Procedures
@@ -5454,7 +5602,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public String[] getAllStudentsMYSQL() {
+	public String[] getAllStudentsMYSQLREPLACED() { //replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -5708,7 +5856,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public String[] getAllDepartmentsMYSQL() {
+	public String[] getAllDepartmentsMYSQLREPLACED() { //replaced with procedure
 		Connection conn = null;
 		try {
 			conn = getConnection();
@@ -6235,7 +6383,7 @@ public class StudentManagementSystemAZURE extends JFrame {
 
 	}
 
-	public String[] getAllCoursesMYSQL() { // returns array of all CID
+	public String[] getAllCoursesMYSQLREPLACED() { //replaced with procedure // returns array of all CID
 		Connection conn = null;
 		try {
 			conn = getConnection();
